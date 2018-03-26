@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>This is the add entry page</h1>
+    <h1>Wiki Entry Form</h1>
+	{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    	{% for message in messages %}
+    	<div> {{ message }}
+		{% endfor %}
+	{% endif %}
+	{% endwith %}1
+    <div>
+		<form action="" method="post">
+			{{ form.hidden_tag() }}
+			<p>{{ form.entry_author.label }}: {{ form.entry_author}}</p>
+			<p>{{ form.entry_type.label }}: {{ form.entry_type }}</p>
+			<p>{{ form.entry_body.label }}:<br>
+			{{ form.entry_body }}
+			</p>
+			<p> {{ form.submit() }} </p>
+		</form>
+	</div>
 {% endblock %}
