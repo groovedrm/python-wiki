@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Geocode Form</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    	{% for message in messages %}
+    	<div> {{ message }}   
+		{% endfor %}
+	{% endif %}
+	{% endwith %}1
+    <div>
+		<form action="" method="post">
+			{{ form.hidden_tag() }}
+			<p>
+				{{ form.address.label }}: {{ form.address(size=32) }}
+			</p>
+			<p> {{ form.submit() }} </p>q
+		</form>
+	</div>
+{% endblock %}

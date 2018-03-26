@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <style>
+	        body {
+	        	font-family: 'Roboto', serif;
+	        	font-size: 25px;	
+	        }
+    	</style>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Wiki - Default</title>
+        {% endif %}
+    </head>
+    <body>
+    	<div>
+    	Wiki: <a href="/index/">Home</a> | 
+    	<a href="/add/">Add Entry</a> | 
+    	<a href="/geocode/">Geocode</a> | 
+    	<a href="/display/">Get All Entries</a>
+        </div>
+    	<hr>
+    	{% block content %}{% endblock %}
+    </body>
+</html>
