@@ -94,14 +94,20 @@ def map():
 	clusterData_1 = [retLatLong(startLat_1, startLong_1) for i in range(100)]
 	markerCluster = folium.plugins.FastMarkerCluster(clusterData_1).add_to(map)
 
-	map_path = app.root_path + '/' + 'templates/map_test.html'
-	flash(map_path)
+	map_path = app.root_path + '/' + 'map/map_test.html'
+	# map_path = '/map/map_test.html'
+	# flash(map_path)
 	map.save(map_path)
 
 	return render_template('map.html')
+
+@app.route('/map_data/')
+def map_data():
+	return '/map/map_test.html'
 		
 	
-	
+if __name__ == "__main__":
+    app.run(debug=True)	
 
 #@app.route('/maprisk/')
 #def maprisk():
