@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    	{% for message in messages %}
+    	<div> {{ message }} </div> 
+		{% endfor %}
+	{% endif %}	
+	{% endwith %}
+    <div>
+    	<h1><iframe src="map_test.html" height="600" width="800"></iframe></h1>
+    </div>
+{% endblock %}

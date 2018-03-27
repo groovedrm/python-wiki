@@ -3,13 +3,19 @@ from flask import render_template, flash, redirect, url_for
 from app.forms import AddressForm, WikiEntryForm
 from app import db
 from app.models import User, Entry
+from folium import plugins
+from app.mapfuncs import retLatLong
 
 import requests
 import pandas as pd
+import folium
+#import os
+
 
 reports_url = 'http://api.staging.maprisk.com/reports'
 geocode_url = 'http://api.staging.maprisk.com/geocode'
 headers = {'x-auth-key': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YWI1NWNkOTY1MTA3MDAxYmM0ZmVhZmEiLCJleHAiOm51bGx9.LURAjucAQ269BzsxWcUp2PysqCZBNOam8oA39fjV-m4'}
+
 
 @app.route('/')
 @app.route('/index/')
@@ -72,7 +78,27 @@ def hazard():
 		return redirect(url_for('hazard'))
 	
 	return render_template('hazard.html', form = form)
-		
+
+@app.route('/map/')
+def map():
+	map = folium.Map(
+	    location = [37.852995, -120.999986],
+	    tiles = 'Stamen Terrain',
+	    detect_retina = True, 
+	    prefer_canvas = True,
+	    zoom_start = 4
+	)
+
+	startLat_1 = 34.286565
+	startLong_1 = -118.561021
+	clusterData_1 = [retLatLong(startLat_1, startLong_1) for i in range(100)]
+	markerCluster = folium.plugins.FastMarkerCluster(clusterData_1).add_to(map)
+
+	map_path = app.root_path + '/' + 'templates/map_test.html'
+	flash(map_path)
+	map.save(map_path)
+
+	return render_template('map.html')
 		
 	
 	
