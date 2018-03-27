@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, send_file
 from app.forms import AddressForm, WikiEntryForm
 from app import db
 from app.models import User, Entry
@@ -92,18 +92,17 @@ def map():
 	startLat_1 = 34.286565
 	startLong_1 = -118.561021
 	clusterData_1 = [retLatLong(startLat_1, startLong_1) for i in range(100)]
-	markerCluster = folium.plugins.FastMarkerCluster(clusterData_1).add_to(map)
+	plugins.FastMarkerCluster(clusterData_1).add_to(map)
+	# markerCluster = folium.plugins.FastMarkerCluster(clusterData_1).add_to(map)
 
-	map_path = app.root_path + '/' + 'map/map_test.html'
-	# map_path = '/map/map_test.html'
-	# flash(map_path)
+	map_path = app.root_path + '/' + 'static/map_test.html'
 	map.save(map_path)
 
 	return render_template('map.html')
 
-@app.route('/map_data/')
+@app.route('/static/map_test.html')
 def map_data():
-	return '/map/map_test.html'
+	return send_file(url_for('static', filename = 'map_test.html'))
 		
 	
 if __name__ == "__main__":
